@@ -12,7 +12,7 @@ class Route
         $components = explode('/', $url);
 
         if(count($components)>2){
-            exit('no page');//TODO
+            exit('no page');
         }
 
         if(!empty($components[0])){
@@ -23,11 +23,11 @@ class Route
         }
         $controllerClass = 'controllers\\'.ucfirst($controllerName);
         if(!class_exists($controllerClass)){
-            exit('no class');//TODO
+            exit('no class');
         }
         $controller = new $controllerClass();
         if(!method_exists($controller, $actionName)){
-            exit('no method');//TODO
+            exit('no method');
         }
         $controller->$actionName();
     }
@@ -38,10 +38,9 @@ class Route
         return "/$controller/$action";
     }
 
-    //=======================================================
     static public function error404(){
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
-        include('vendor/views/error404.php');
+        include('/views/error404.php');
         die();
         //http_response_code(404);
     }
