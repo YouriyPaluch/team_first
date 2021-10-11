@@ -14,7 +14,7 @@ class View
         }
     }
 
-    public function render(array $newsAll)
+    public function render(array $newsAll = [])
     {
         extract($newsAll);
         include_once 'vendor' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $this->_template . '.php';
