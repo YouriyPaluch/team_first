@@ -4,6 +4,7 @@
 namespace controllers;
 use models\Store;
 use core\View;
+use core\Route;
 
 class NewsController
 {
@@ -12,15 +13,22 @@ class NewsController
      */
 public function index(){
     $news = new Store();
-    $newsIndex = $news->allNews();
+    $newsAll = $news->allNews();
     $view = new View('index_index');
-    $view-> render($newsIndex);
+    $view-> render($newsAll);
 }
 public function create(){
     $view = new View('news_create');
     $view-> render();
 }
 public function store(){
-
+    $newsNew = [];
+    $newsNew = $_REQUEST['title'];
+    $newsNew = $_REQUEST['text'];
+    $newsNew = $_REQUEST['author'];
+    $news = new Store();
+    $newsAll = $news->allNews();
+    $newsAll->addNews($newsNew);
+    Route::redirect();
 }
 }
