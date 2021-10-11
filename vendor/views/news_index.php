@@ -17,7 +17,7 @@
         <td><?=$news['createdate']?></td>
         <td><?=$news['updatedate']?></td>
         <td><?=$news['author']?></td>
-        <td><form action="/NewsController/edit" method="post">
+        <td><form action="/news/edit" method="post">
                 <input type="hidden" name="id" value="<?= $news['id']?>">
                 <input type="submit" value="edit" >
             </form>
@@ -26,6 +26,6 @@
         <?php endif;?>
     </tr>
 </table>
-<form action="/NewsController/create">
+<form action="/news/create">
     <input type="submit" value="new note">
 </form>

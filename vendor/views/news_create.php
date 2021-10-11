@@ -1,4 +1,4 @@
-<form action="/NewsController/store" method="post">
+<form action="/news/store" method="post">
     <label>Title
         <input type="text" name="title">
     </label>
