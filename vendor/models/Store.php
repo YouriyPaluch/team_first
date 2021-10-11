@@ -21,7 +21,7 @@ class Store
     /**
      * @return mixed|void
      */
-    public function all(){
+    public function allNews(){
         $query = "SELECT * FROM news;";
         $result = $this->_db->query($query);
         if(!$result){
@@ -33,7 +33,7 @@ class Store
     /** add new news to DB
      * @param $newsItem
      */
-    public function add(array $newsItem){
+    public function addNews(array $newsItem){
         if (!$newsItem['updatedate']){
             unset($newsItem['updatedate']);
         }
@@ -61,7 +61,7 @@ class Store
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function update(array $newsItem){
+    public function saveNews(array $newsItem){
         $id = $newsItem['id'];
         $title = $newsItem['title'];
         $text = $this->_db->real_escape_string($newsItem['text']);

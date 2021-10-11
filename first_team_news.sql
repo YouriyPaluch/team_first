@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Час створення: Жов 09 2021 р., 23:28
+-- Час створення: Жов 10 2021 р., 22:15
 -- Версія сервера: 5.7.33
 -- Версія PHP: 8.0.8
 
@@ -32,7 +32,7 @@ CREATE TABLE `news` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `createdate` timestamp NOT NULL,
-  `updatedate` timestamp NOT NULL,
+  `updatedate` timestamp NULL DEFAULT NULL,
   `author` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -41,7 +41,10 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `text`, `createdate`, `updatedate`, `author`) VALUES
-(1, 'New news', 'Some text', '2021-10-09 20:26:55', '2021-10-09 20:26:59', 'Some author');
+(1, 'New news', 'Some text', '2021-10-09 20:26:55', '2021-10-09 20:26:59', 'Some author'),
+(2, 'Second new', 'Some text for second news', '2021-10-10 17:36:31', NULL, 'Korchevskii'),
+(3, 'Third new', 'Some text for third news', '2021-10-10 17:46:18', NULL, 'Korchevskii'),
+(4, 'Fourth new', 'Some text was update', '2021-10-10 17:48:08', '2021-10-10 19:14:05', 'Korchevskii');
 
 --
 -- Індекси збережених таблиць
@@ -61,7 +64,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT для таблиці `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
