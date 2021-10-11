@@ -26,6 +26,6 @@
         <?php endif;?>
     </tr>
 </table>
-<form action="/NewsController/create">
+<form action="/NewsController/news_create">
     <input type="submit" value="new note">
 </form>

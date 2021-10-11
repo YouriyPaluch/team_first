@@ -2,28 +2,28 @@
 
 
 namespace controllers;
-
+use core\AbstractController;
 use core\Route;
 use core\View;
 use models\Store;
 
-class NewsController
+class NewsController extends AbstractController
 {
     /**
      * chose page index and take array from DB
      */
-    public function index()
+    public function news_index()
     {
         $news = new Store();
         $newsAll = $news->allNews();
-        $view = new View('index_index');
+        $view = new View('news_index');
         $view->render($newsAll);
     }
 
     /**
      * chose page for create news
      */
-    public function create()
+    public function news_create()
     {
         $view = new View('news_create');
         $view->render();
@@ -39,13 +39,13 @@ class NewsController
         $newsNew['author'] = $_REQUEST['author'];
         $news = new Store();
         $news->addNews($newsNew);
-        Route::redirect();
+        Route::redirect('/NewsController/news_index');
     }
 
     /**
      * chose page for edit news
      */
-    public function edit()
+    public function news_edit()
     {
         $view = new View('news_edit');
         $view->render();
