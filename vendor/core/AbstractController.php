@@ -11,9 +11,9 @@ abstract class AbstractController
     protected $view ;
     protected $store;
 
-    public function __construct($store)
+    public function __construct()
     {
         $this->store = new Store();
     }
-    abstract public function news_index();
+    abstract public function index();
 }

@@ -2,12 +2,12 @@
 
 
 namespace controllers;
-
+use core\AbstractController;
 
 class IndexController extends AbstractController
 {
-    public function news_index()
+    public function index()
     {
-
+        echo 'dsksmmsf';
     }
 }
