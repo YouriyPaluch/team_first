@@ -13,7 +13,7 @@ class NewsController extends AbstractController
     /**
      * chose page index and take array from DB
      */
-    public function news_index()
+    public function index()
     {
         $news = new Store();
         $newsAll = $news->allNews();
@@ -46,7 +46,7 @@ class NewsController extends AbstractController
     /**
      * chose page for edit news
      */
-    public function news_edit()
+    public function edit()
     {
         $view = new View('news_edit');
         $view->render();
