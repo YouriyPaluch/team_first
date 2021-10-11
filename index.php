@@ -8,5 +8,5 @@ spl_autoload_register(function ($className){
     }
     return false;
 });
-include_once 'vendor'.DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR.'config.php';
+include_once 'vendor'.DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR.'config_exemple.php';
 Route::init();
