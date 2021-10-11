@@ -1,9 +1,9 @@
 <?php
-
 /******
+ * insert login to BD
  * DB *
  ******/
-const DB_HOST = 'localhost';
-const DB_USER = 'root';
+const DB_HOST = '';
+const DB_USER = '';
 const DB_PASS = '';
-const DB_NAME = 'first_team_news';
+const DB_NAME = '';
