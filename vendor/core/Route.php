@@ -1,10 +1,10 @@
 <?php
 
-
+namespace core;
 class Route
 {
     static public function init(){
-        $controllerName = 'index';
+        $controllerName = 'Index';
         $actionName = 'index';
 
         $url = $_SERVER['REDIRECT_URL']??'';
@@ -21,7 +21,7 @@ class Route
         if(!empty($components[1])){
             $actionName = mb_strtolower($components[1]);
         }
-        $controllerClass = 'controllers\\'.ucfirst($controllerName);
+        $controllerClass = '\\controllers\\'.ucfirst($controllerName).'Controller';
         if(!class_exists($controllerClass)){
             exit('no class');//TODO
         }
