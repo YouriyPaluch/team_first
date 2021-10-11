@@ -1,5 +1,7 @@
 <?php
 namespace models;
+
+use mysqli;
 class Store
 {
     /**
