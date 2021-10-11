@@ -1,12 +1,12 @@
 <?php
-include_once 'vendor'.DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR.'config.php';
-include_once 'vendor'.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'Store.php';
-$new = [
-    'id'=>4,
-    'title'=>'Fourth news',
-    'text'=>'Some text was update'
-];
-
-$news = new Store();
-$news->saveNews($new);
-var_dump($news->allNews());
+spl_autoload_register(function ($className){
+    $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
+    $classFile = 'vendor'.DIRECTORY_SEPARATOR.'core'.$className.'.php';
+    if(file_exists($classFile)){
+        include_once $classFile;
+        return true;
+    }
+    return false;
+});
+include_once 'includes'.DIRECTORY_SEPARATOR.'config.php';
+Route::init();
