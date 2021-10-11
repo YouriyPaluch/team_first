@@ -19,6 +19,7 @@ class Store
     }
 
     /**
+     * select all news
      * @return mixed|void
      */
     public function allNews(){
@@ -37,7 +38,7 @@ class Store
         if (!$newsItem['updatedate']){
             unset($newsItem['updatedate']);
         }
-        $newsItem['$text'] = $this->_db->real_escape_string($newsItem['$text']);
+        $newsItem['text'] = $this->_db->real_escape_string($newsItem['$text']);
         $newsItem['createdate'] = date("Y-m-d H:i:s");
         $newKeys = array_keys($newsItem);
         $newKeysStr = join(', ', $newKeys);
@@ -59,15 +60,20 @@ class Store
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return mysqli_fetch_assoc($result);
     }
 
+    /**
+     * save edit news by id
+     * @param array $newsItem
+     */
     public function saveNews(array $newsItem){
         $id = $newsItem['id'];
         $title = $newsItem['title'];
         $text = $this->_db->real_escape_string($newsItem['text']);
         $updateDate = date("Y-m-d H:i:s");
         $query = "UPDATE news SET title = '$title', text = '$text', updatedate = '$updateDate' WHERE id = $id;";
+        var_dump($query);
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
