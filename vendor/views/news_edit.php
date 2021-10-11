@@ -1,4 +1,4 @@
-<form action="/news/update" method="get">
+<form action="/news/update" method="post">
     <input type="hidden" name="id" value="<?= $news['id']?>">
     <label>Title
         <input type="text" name="note" value="<?= $news['title']?>">
