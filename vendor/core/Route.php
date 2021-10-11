@@ -1,14 +1,13 @@
 <?php
-namespace core;
+
 
 class Route
 {
     static public function init(){
-        $controllerName = 'NewsController';
-        $actionName = 'index';
+        $controllerName = 'IndexController';
+        $actionName = 'news_index';
 
         $url = $_SERVER['REDIRECT_URL']??'';
-        var_dump($url);
         $url =ltrim($url,'/');
         $components = explode('/', $url);
 
@@ -23,7 +22,6 @@ class Route
             $actionName = mb_strtolower($components[1]);
         }
         $controllerClass = '\\controllers\\'.ucfirst($controllerName);
-        var_dump($controllerClass);
         if(!class_exists($controllerClass)){
             exit('no class');//TODO
         }
@@ -33,19 +31,9 @@ class Route
         }
         $controller->$actionName();
     }
-
-    /**
-     * @param string $url
-     */
     static public function redirect($url = '/'){
         header("Location: $url");
     }
-
-    /**
-     * @param $controller
-     * @param $action
-     * @return string
-     */
     static public function url($controller, $action){
         return "/$controller/$action";
     }

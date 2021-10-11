@@ -1,20 +1,18 @@
 <?php
 
 
-namespace core;
+namespace controllers;
 
-use core\View;
-use models\Store;
 
 abstract class AbstractController
 {
     protected $view;
     protected $store;
 
-    public function __construct()
+    public function __construct($view,$store)
     {
-        $this->view = new View();
-        $this->store = new Store();
+        $this->view = $view;
+        $this->store = $store;
     }
     abstract public function news_index();
 }
