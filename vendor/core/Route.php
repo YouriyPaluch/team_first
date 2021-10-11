@@ -4,8 +4,8 @@
 class Route
 {
     static public function init(){
-        $controllerName = 'IndexController';
-        $actionName = 'news_index';
+        $controllerName = 'index';
+        $actionName = 'index';
 
         $url = $_SERVER['REDIRECT_URL']??'';
         $url =ltrim($url,'/');
@@ -21,7 +21,7 @@ class Route
         if(!empty($components[1])){
             $actionName = mb_strtolower($components[1]);
         }
-        $controllerClass = '\\controllers\\'.ucfirst($controllerName);
+        $controllerClass = 'controllers\\'.ucfirst($controllerName);
         if(!class_exists($controllerClass)){
             exit('no class');//TODO
         }
