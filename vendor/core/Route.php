@@ -4,8 +4,8 @@
 class Route
 {
     static public function init(){
-        $controllerName = 'IndexController';
-        $actionName = 'news_index';
+        $controllerName = 'Index';
+        $actionName = 'index';
 
         $url = $_SERVER['REDIRECT_URL']??'';
         $url =ltrim($url,'/');
@@ -21,7 +21,7 @@ class Route
         if(!empty($components[1])){
             $actionName = mb_strtolower($components[1]);
         }
-        $controllerClass = '\\controllers\\'.ucfirst($controllerName);
+        $controllerClass = '\\controllers\\'.ucfirst($controllerName).'Controller';
         if(!class_exists($controllerClass)){
             exit('no class');//TODO
         }
@@ -38,10 +38,9 @@ class Route
         return "/$controller/$action";
     }
 
-    //=======================================================
     static public function error404(){
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
-        include('vendor/views/error404.php');
+        include('/views/error404.php');
         die();
         //http_response_code(404);
     }
