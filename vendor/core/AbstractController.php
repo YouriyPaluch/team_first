@@ -14,5 +14,5 @@ abstract class AbstractController
         $this->view = $view;
         $this->store = $store;
     }
-    abstract public function index();
+    abstract public function news_index();
 }
