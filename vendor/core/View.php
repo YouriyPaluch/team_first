@@ -14,9 +14,9 @@ class View
         }
     }
 
-    public function render(array $newsAll = [])
+    public function render(array $movies = [])
     {
-        extract($newsAll);
+        extract($movies);
         include_once 'vendor' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $this->_template . '.php';
     }
 }

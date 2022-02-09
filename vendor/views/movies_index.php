@@ -8,22 +8,22 @@
         <th>Date update</th>
         <th>Author</th>
     </tr>
-    <?php if(count($newsAll)>0):?>
-    <?php foreach ($newsAll as $news):?>
+    <?php if(count($movies)>0):?>
+    <?php foreach ($movies as $movie):?>
     <tr>
-        <td><?=$news['id']?></td>
-        <td><?=$news['title']?></td>
-        <td><?=$news['text']?></td>
-        <td><?=$news['createdate']?></td>
-        <td><?=$news['updatedate']?></td>
-        <td><?=$news['author']?></td>
+        <td><?=$movie['id']?></td>
+        <td><?=$movie['title']?></td>
+        <td><?=$movie['text']?></td>
+        <td><?=$movie['createdate']?></td>
+        <td><?=$movie['updatedate']?></td>
+        <td><?=$movie['author']?></td>
         <td><form action="/news/edit" method="get">
-                <input type="hidden" name="id" value="<?= $news['id']?>">
+                <input type="hidden" name="id" value="<?= $movie['id']?>">
                 <input type="submit" value="edit" >
             </form>
         </td>
         <td><form action="/news/delete" method="get">
-                <input type="hidden" name="id" value="<?= $news['id']?>">
+                <input type="hidden" name="id" value="<?= $movie['id']?>">
                 <input type="submit" value="delete" >
             </form>
         </td>

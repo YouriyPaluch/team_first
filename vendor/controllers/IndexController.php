@@ -9,7 +9,7 @@ class IndexController extends AbstractController
 {
     public function index()
     {
-        $view = new View('news_index');
+        $view = new View('movies_index');
         $view->render();
     }
 }

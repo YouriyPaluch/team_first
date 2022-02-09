@@ -8,17 +8,17 @@ use core\Route;
 use core\View;
 use models\Store;
 
-class NewsController extends AbstractController
+class MovieController extends AbstractController
 {
     /**
      * chose page index and take array from DB
      */
     public function index()
     {
-        $news = new Store();
-        $newsAll = $news->allNews();
-        $view = new View('news_index');
-        $view->render($newsAll);
+        $store = new Store();
+        $movies = $store->allMovies();
+        $view = new View('movies_index');
+        $view->render(['movies' => $movies]);
     }
 
     /**
@@ -26,7 +26,7 @@ class NewsController extends AbstractController
      */
     public function create()
     {
-        $view = new View('news_create');
+        $view = new View('movie_create');
         $view->render();
     }
     /**
@@ -34,13 +34,13 @@ class NewsController extends AbstractController
      */
     public function store()
     {
-        $newsNew = [];
-        $newsNew['title'] = $_REQUEST['title'];
-        $newsNew['text'] = $_REQUEST['text'];
-        $newsNew['author'] = $_REQUEST['author'];
-        $news = new Store();
-        $news->addNews($newsNew);
-        Route::redirect('/News/index');
+        $moviesNew = [];
+        $moviesNew['title'] = $_REQUEST['title'];
+        $moviesNew['text'] = $_REQUEST['text'];
+        $moviesNew['author'] = $_REQUEST['author'];
+        $store = new Store();
+        $store->addMovie($moviesNew);
+        Route::redirect('/Movie/index');
     }
 
     /**
@@ -48,11 +48,11 @@ class NewsController extends AbstractController
      */
     public function edit()
     {
-        $news = new Store();
+        $store = new Store();
         $id = $_REQUEST['id'];
-        $newsItem = $news->getNews($id);
-        $view = new View('news_edit');
-        $view->render(['news'=>$newsItem]);
+        $movie = $store->getMovie($id);
+        $view = new View('movie_edit');
+        $view->render(['movie'=>$movie]);
     }
 
     /**
@@ -60,13 +60,13 @@ class NewsController extends AbstractController
      */
     public function update()
     {
-        $newsNew = [];
-        $newsNew['id'] = $_REQUEST['id'];
-        $newsNew['title'] = $_REQUEST['title'];
-        $newsNew['text'] = $_REQUEST['text'];
-        $news = new Store();
-        $news->saveNews($newsNew);
-        Route::redirect('/News/index');
+        $movie = [];
+        $movie['id'] = $_REQUEST['id'];
+        $movie['title'] = $_REQUEST['title'];
+        $movie['text'] = $_REQUEST['text'];
+        $store = new Store();
+        $store->saveMovie($movie);
+        Route::redirect('/Movie/index');
     }
 
     /**
@@ -75,8 +75,8 @@ class NewsController extends AbstractController
     public function delete()
     {
         $id = $_REQUEST['id'];
-        $news = new Store();
-        $news->delNews($id);
-        Route::redirect('/News/index');
+        $store = new Store();
+        $store->delMovie($id);
+        Route::redirect('/Movie/index');
     }
 }

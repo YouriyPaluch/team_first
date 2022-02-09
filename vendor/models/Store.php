@@ -20,12 +20,16 @@ class Store
         }
     }
 
+    public function createTable(){
+
+    }
+
     /**
      * select all news
      * @return mixed|void
      */
-    public function allNews(){
-        $query = "SELECT * FROM news;";
+    public function allMovies(){
+        $query = "SELECT * FROM `movies`;";
         $result = $this->_db->query($query);
         if(!$result){
             die($this->_db->error);//TODO exeption
@@ -36,16 +40,16 @@ class Store
     /** add new news to DB
      * @param $newsItem
      */
-    public function addNews(array $newsItem){
-        if (!$newsItem['updatedate']){
-            unset($newsItem['updatedate']);
+    public function addMovie(array $movies){
+        if (!$movies['updatedate']){
+            unset($movies['updatedate']);
         }
-        $newsItem['text'] = $this->_db->real_escape_string($newsItem['text']);
-        $newsItem['createdate'] = date("Y-m-d H:i:s");
-        $newKeys = array_keys($newsItem);
+        $movies['text'] = $this->_db->real_escape_string($movies['text']);
+        $movies['createdate'] = date("Y-m-d H:i:s");
+        $newKeys = array_keys($movies);
         $newKeysStr = join(', ', $newKeys);
-        $new = join("', '" , $newsItem);
-        $query = "INSERT INTO news($newKeysStr) values ('$new');";
+        $movie = join("', '" , $movies);
+        $query = "INSERT INTO `movies`($newKeysStr) values ('$movie');";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
@@ -56,8 +60,8 @@ class Store
      * @param int $id
      * @return mixed|void
      */
-    public function getNews(int $id){
-        $query = "SELECT * FROM news WHERE id = $id;";
+    public function getMovie(int $id){
+        $query = "SELECT * FROM `movies` WHERE id = $id;";
         $result = $this->_db->query($query);
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
@@ -67,24 +71,24 @@ class Store
 
     /**
      * save edit news by id
-     * @param array $newsItem
+     * @param array $movies
      */
-    public function saveNews(array $newsItem){
-        $id = $newsItem['id'];
-        $title = $newsItem['title'];
-        $text = $this->_db->real_escape_string($newsItem['text']);
+    public function saveMovie(array $movies){
+        $id = $movies['id'];
+        $title = $movies['title'];
+        $text = $this->_db->real_escape_string($movies['text']);
         $updateDate = date("Y-m-d H:i:s");
-        $query = "UPDATE `news` SET `title` = '$title', `text` = '$text', `updatedate` = '$updateDate' WHERE `id` = $id;";
+        $query = "UPDATE `movies` SET `title` = '$title', `text` = '$text', `updatedate` = '$updateDate' WHERE `id` = $id;";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
     }
 
     /**
-     * @param int $newsItem
+     * @param int $id
      */
-    public function delNews(int $id){
-        $query = "DELETE FROM `news` WHERE `id` = $id;";
+    public function delMovie(int $id){
+        $query = "DELETE FROM `movies` WHERE `id` = $id;";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
