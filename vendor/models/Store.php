@@ -41,15 +41,18 @@ class Store
      * @param $newsItem
      */
     public function addMovie(array $movies){
+        $uploadDir = 'photo/';
+        $tmpName = $_FILES['photo']['tmp_name'];
+        $uploadFile = $uploadDir.basename($_FILES['photo']['name']);
+        move_uploaded_file($tmpName, $uploadFile);
         if (!$movies['updatedate']){
             unset($movies['updatedate']);
         }
-        $movies['text'] = $this->_db->real_escape_string($movies['text']);
-        $movies['createdate'] = date("Y-m-d H:i:s");
+        $movies['description'] = $this->_db->real_escape_string($movies['description']);
         $newKeys = array_keys($movies);
         $newKeysStr = join(', ', $newKeys);
-        $movie = join("', '" , $movies);
-        $query = "INSERT INTO `movies`($newKeysStr) values ('$movie');";
+        $movie = '\'' . join("', '" , $movies).'\', \'/'.$uploadFile.'\'';
+        $query = "INSERT INTO `movies`(".$newKeysStr.", photo) values (".$movie.");";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
@@ -75,10 +78,10 @@ class Store
      */
     public function saveMovie(array $movies){
         $id = $movies['id'];
-        $title = $movies['title'];
-        $text = $this->_db->real_escape_string($movies['text']);
-        $updateDate = date("Y-m-d H:i:s");
-        $query = "UPDATE `movies` SET `title` = '$title', `text` = '$text', `updatedate` = '$updateDate' WHERE `id` = $id;";
+        $name = $movies['name'];
+        $description = $this->_db->real_escape_string($movies['description']);
+        $releaseDate = $movies['$releaseDate'];
+        $query = "UPDATE `movies` SET `name` = '$name', `description` = '$description', `releaseDate` = '$releaseDate' WHERE `id` = $id;";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }

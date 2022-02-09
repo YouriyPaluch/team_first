@@ -1,36 +1,41 @@
-<h2>All News</h2>
-<table>
-    <tr>
-        <th>№</th>
-        <th>Title</th>
-        <th>Article</th>
-        <th>Date create</th>
-        <th>Date update</th>
-        <th>Author</th>
-    </tr>
-    <?php if(count($movies)>0):?>
-    <?php foreach ($movies as $movie):?>
-    <tr>
-        <td><?=$movie['id']?></td>
-        <td><?=$movie['title']?></td>
-        <td><?=$movie['text']?></td>
-        <td><?=$movie['createdate']?></td>
-        <td><?=$movie['updatedate']?></td>
-        <td><?=$movie['author']?></td>
-        <td><form action="/news/edit" method="get">
-                <input type="hidden" name="id" value="<?= $movie['id']?>">
-                <input type="submit" value="edit" >
-            </form>
-        </td>
-        <td><form action="/news/delete" method="get">
-                <input type="hidden" name="id" value="<?= $movie['id']?>">
-                <input type="submit" value="delete" >
-            </form>
-        </td>
-        <?php endforeach;?>
-        <?php endif;?>
-    </tr>
-</table>
-<form action="/news/create">
+<link rel="stylesheet" href="/vendor/css/bootstrap.css">
+<?php if (count($movies) > 0): ?>
+    <h2>All movies</h2>
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Data release</th>
+            <th>Photo</th>
+        </tr>
+        <?php $i=1 ?>
+        <?php foreach ($movies as $movie): ?>
+        <tr>
+            <td><?=$i?></td>
+            <td><?= $movie['name'] ?></td>
+            <td><?= $movie['description'] ?></td>
+            <td><?= $movie['releaseDate'] ?></td>
+            <td><img src="<?=$movie['photo']?>"/></td>
+            <td>
+                <form action="/movie/edit" method="get">
+                    <input type="hidden" name="id" value="<?= $movie['id'] ?>">
+                    <input type="submit" value="edit">
+                </form>
+            </td>
+            <td>
+                <form action="/movie/delete" method="get">
+                    <input type="hidden" name="id" value="<?= $movie['id'] ?>">
+                    <input type="submit" value="delete">
+                </form>
+            </td>
+            <?php $i++ ?>
+            <?php endforeach; ?>
+        </tr>
+    </table>
+<?php else: ?>
+    <h2>Now site not have movies</h2>
+<?php endif; ?>
+<form action="/movie/create">
     <input type="submit" value="new note">
 </form>

@@ -1,4 +1,4 @@
-<h2>Show all notes</h2>
-<form action="IndexController/index" method="post">
-    <input type="submit">
+<a href="/"><h1>Welcome to my site</h1></a>
+<form action="/movie/index" method="GET">
+    <input type="submit" value="Watch all movies">
 </form>

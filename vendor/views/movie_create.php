@@ -1,12 +1,16 @@
-<form action="/news/store" method="post">
-    <label>Title
-        <input type="text" name="title">
+<link rel="stylesheet" href="/vendor/css/bootstrap.css">
+<form enctype="multipart/form-data" action="/movie/store" method="post">
+    <label>Name movie
+        <input type="text" name="name">
     </label>
-    <label>News
-        <textarea name="text"></textarea>
+    <label>Description
+        <textarea name="description"></textarea>
     </label>
-    <label>Author
-        <input type="text" name="author">
+    <label>Data release
+        <input type="date" name="releaseDate">
+    </label>
+    <label>Photo
+        <input type="file" name="photo">
     </label>
     <input type="submit" value="Save">
 </form>

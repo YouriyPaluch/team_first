@@ -35,12 +35,12 @@ class MovieController extends AbstractController
     public function store()
     {
         $moviesNew = [];
-        $moviesNew['title'] = $_REQUEST['title'];
-        $moviesNew['text'] = $_REQUEST['text'];
-        $moviesNew['author'] = $_REQUEST['author'];
+        $moviesNew['name'] = $_REQUEST['name'];
+        $moviesNew['description'] = $_REQUEST['description'];
+        $moviesNew['releaseDate'] = $_REQUEST['releaseDate'];
         $store = new Store();
         $store->addMovie($moviesNew);
-        Route::redirect('/Movie/index');
+        Route::redirect('/movie/index');
     }
 
     /**
@@ -66,7 +66,7 @@ class MovieController extends AbstractController
         $movie['text'] = $_REQUEST['text'];
         $store = new Store();
         $store->saveMovie($movie);
-        Route::redirect('/Movie/index');
+        Route::redirect('/movie/index');
     }
 
     /**
@@ -77,6 +77,6 @@ class MovieController extends AbstractController
         $id = $_REQUEST['id'];
         $store = new Store();
         $store->delMovie($id);
-        Route::redirect('/Movie/index');
+        Route::redirect('/movie/index');
     }
 }
