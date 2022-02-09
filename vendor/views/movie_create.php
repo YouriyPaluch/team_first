@@ -10,7 +10,7 @@
         <input type="date" name="releaseDate">
     </label>
     <label>Photo
-        <input type="file" name="photo">
+        <input type="file" name="image">
     </label>
     <input type="submit" value="Save">
 </form>

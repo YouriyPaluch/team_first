@@ -17,8 +17,19 @@ class MovieController extends AbstractController
     {
         $store = new Store();
         $movies = $store->allMovies();
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+        $size_page = 1;
+        $offset = ($page - 1) * $size_page;
+        $result = count($movies);
+        $total_pages = ceil($result / $size_page);
+        $res_data = $store->createTable($offset, $size_page);
+        $firstNumber = ($page*$size_page)-($size_page-1);
         $view = new View('movies_index');
-        $view->render(['movies' => $movies]);
+        $view->render(['movies' => $res_data, 'page' => $page, 'total_pages' => $total_pages, 'firstNumber'=>$firstNumber]);
     }
 
     /**
@@ -29,6 +40,7 @@ class MovieController extends AbstractController
         $view = new View('movie_create');
         $view->render();
     }
+
     /**
      * make mass  news and save in DB
      */
@@ -52,7 +64,7 @@ class MovieController extends AbstractController
         $id = $_REQUEST['id'];
         $movie = $store->getMovie($id);
         $view = new View('movie_edit');
-        $view->render(['movie'=>$movie]);
+        $view->render(['movie' => $movie]);
     }
 
     /**

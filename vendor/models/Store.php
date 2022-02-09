@@ -20,8 +20,13 @@ class Store
         }
     }
 
-    public function createTable(){
-
+    public function createTable($offset, $size_page){
+        $query = "SELECT * FROM `movies` LIMIT $offset, $size_page;";
+        $result = $this->_db->query($query);
+        if(!$result){
+            die($this->_db->error);//TODO exeption
+        }
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     /**
@@ -37,22 +42,26 @@ class Store
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function fromPagination(){
+
+    }
+
     /** add new news to DB
      * @param $newsItem
      */
     public function addMovie(array $movies){
-        $uploadDir = 'photo/';
-        $tmpName = $_FILES['photo']['tmp_name'];
-        $uploadFile = $uploadDir.basename($_FILES['photo']['name']);
-        move_uploaded_file($tmpName, $uploadFile);
-        if (!$movies['updatedate']){
-            unset($movies['updatedate']);
+        $uploadDir = 'photo';
+        if(!is_dir($uploadDir)){
+            mkdir($uploadDir);
         }
+        $tmpName = $_FILES['image']['tmp_name'];
+        $uploadFile = $uploadDir.'/'.basename($_FILES['image']['name']);
+        move_uploaded_file($tmpName, $uploadFile);
         $movies['description'] = $this->_db->real_escape_string($movies['description']);
         $newKeys = array_keys($movies);
         $newKeysStr = join(', ', $newKeys);
         $movie = '\'' . join("', '" , $movies).'\', \'/'.$uploadFile.'\'';
-        $query = "INSERT INTO `movies`(".$newKeysStr.", photo) values (".$movie.");";
+        $query = "INSERT INTO `movies`(".$newKeysStr.", image) values (".$movie.");";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
@@ -64,7 +73,7 @@ class Store
      * @return mixed|void
      */
     public function getMovie(int $id){
-        $query = "SELECT * FROM `movies` WHERE id = $id;";
+        $query = "SELECT * FROM `movies` WHERE `movieId` = $id;";
         $result = $this->_db->query($query);
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
@@ -81,7 +90,7 @@ class Store
         $name = $movies['name'];
         $description = $this->_db->real_escape_string($movies['description']);
         $releaseDate = $movies['$releaseDate'];
-        $query = "UPDATE `movies` SET `name` = '$name', `description` = '$description', `releaseDate` = '$releaseDate' WHERE `id` = $id;";
+        $query = "UPDATE `movies` SET `name` = '$name', `description` = '$description', `releaseDate` = '$releaseDate' WHERE `movieId` = $id;";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
@@ -91,7 +100,7 @@ class Store
      * @param int $id
      */
     public function delMovie(int $id){
-        $query = "DELETE FROM `movies` WHERE `id` = $id;";
+        $query = "DELETE FROM `movies` WHERE `movieId` = $id;";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }

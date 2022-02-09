@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<body class="container">
+<header><a href="/"><h1>Welcome to my site</h1></a></header>
     <?php include_once 'vendor'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$this->_page.'.php'?>
 </body>
 </html>
