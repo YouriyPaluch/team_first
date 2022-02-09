@@ -40,7 +40,7 @@ class Store
         if (!$newsItem['updatedate']){
             unset($newsItem['updatedate']);
         }
-        $newsItem['text'] = $this->_db->real_escape_string($newsItem['$text']);
+        $newsItem['text'] = $this->_db->real_escape_string($newsItem['text']);
         $newsItem['createdate'] = date("Y-m-d H:i:s");
         $newKeys = array_keys($newsItem);
         $newKeysStr = join(', ', $newKeys);

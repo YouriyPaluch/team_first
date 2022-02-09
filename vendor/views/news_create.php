@@ -3,7 +3,7 @@
         <input type="text" name="title">
     </label>
     <label>News
-        <input type="text" name="news">
+        <textarea name="text"></textarea>
     </label>
     <label>Author
         <input type="text" name="author">
