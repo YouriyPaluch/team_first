@@ -22,6 +22,11 @@
                 <input type="submit" value="edit" >
             </form>
         </td>
+        <td><form action="/news/delete" method="get">
+                <input type="hidden" name="id" value="<?= $news['id']?>">
+                <input type="submit" value="delete" >
+            </form>
+        </td>
         <?php endforeach;?>
         <?php endif;?>
     </tr>

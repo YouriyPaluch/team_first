@@ -74,8 +74,17 @@ class Store
         $title = $newsItem['title'];
         $text = $this->_db->real_escape_string($newsItem['text']);
         $updateDate = date("Y-m-d H:i:s");
-        $query = "UPDATE news SET title = '$title', text = '$text', updatedate = '$updateDate' WHERE id = $id;";
-        var_dump($query);
+        $query = "UPDATE `news` SET `title` = '$title', `text` = '$text', `updatedate` = '$updateDate' WHERE `id` = $id;";
+        if(!$this->_db->query($query)){
+            die($this->_db->error);//TODO exeption
+        }
+    }
+
+    /**
+     * @param int $newsItem
+     */
+    public function delNews(int $id){
+        $query = "DELETE FROM `news` WHERE `id` = $id;";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }

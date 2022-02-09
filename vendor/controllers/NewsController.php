@@ -24,7 +24,7 @@ class NewsController extends AbstractController
     /**
      * chose page for create news
      */
-    public function news_create()
+    public function create()
     {
         $view = new View('news_create');
         $view->render();
@@ -40,7 +40,7 @@ class NewsController extends AbstractController
         $newsNew['author'] = $_REQUEST['author'];
         $news = new Store();
         $news->addNews($newsNew);
-        Route::redirect('/NewsController/news_index');
+        Route::redirect('/News/index');
     }
 
     /**
@@ -48,8 +48,9 @@ class NewsController extends AbstractController
      */
     public function edit()
     {
-        $id= $_REQUEST['id'];
-        $newsItem = $this->store->getNews($id);
+        $news = new Store();
+        $id = $_REQUEST['id'];
+        $newsItem = $news->getNews($id);
         $view = new View('news_edit');
         $view->render(['news'=>$newsItem]);
     }
@@ -65,6 +66,17 @@ class NewsController extends AbstractController
         $newsNew['text'] = $_REQUEST['text'];
         $news = new Store();
         $news->saveNews($newsNew);
-        Route::redirect();
+        Route::redirect('/News/index');
+    }
+
+    /**
+     * delete news
+     */
+    public function delete()
+    {
+        $id = $_REQUEST['id'];
+        $news = new Store();
+        $news->delNews($id);
+        Route::redirect('/News/index');
     }
 }
