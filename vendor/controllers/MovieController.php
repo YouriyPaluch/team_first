@@ -61,9 +61,18 @@ class MovieController extends AbstractController
     public function edit()
     {
         $store = new Store();
-        $id = $_REQUEST['id'];
-        $movie = $store->getMovie($id);
+        $movieId = (int)$_REQUEST['movieId'];
+        $movie = $store->getMovie($movieId);
         $view = new View('movie_edit');
+        $view->render(['movie' => $movie]);
+    }
+
+
+    public function watch(){
+        $store = new Store();
+        $movieId = (int)$_REQUEST['movieId'];
+        $movie = $store->getMovie($movieId);
+        $view = new View('movie_view');
         $view->render(['movie' => $movie]);
     }
 

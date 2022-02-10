@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/vendor/css/bootstrap.css">
 <form enctype="multipart/form-data" action="/movie/store" method="post">
     <label>Name movie
         <input type="text" name="name">

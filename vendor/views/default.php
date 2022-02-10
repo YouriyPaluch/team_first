@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="/vendor/css/bootstrap.css">
 </head>
 <body class="container">
 <header><a href="/"><h1>Welcome to my site</h1></a></header>

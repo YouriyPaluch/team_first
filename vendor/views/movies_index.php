@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/vendor/css/bootstrap.css">
 <?php if (count($movies) > 0): ?>
     <h2>All movies</h2>
     <table>
@@ -11,21 +10,21 @@
         </tr>
         <?php $i=$firstNumber ?>
         <?php foreach ($movies as $movie): ?>
-        <tr>
+        <tr onclick="document.location='/movie/watch?movieId=<?= $movie['movieId'] ?>'">
             <td><?=$i?></td>
             <td><?= $movie['name'] ?></td>
             <td><?= $movie['description'] ?></td>
             <td><?= $movie['releaseDate'] ?></td>
-            <td><img class="span1" src="<?=$movie['image']?>"/></td>
+            <td><img class="span1" src="<?=$movie['photo']?>"/></td>
             <td>
                 <form action="/movie/edit" method="get">
-                    <input type="hidden" name="id" value="<?= $movie['movieId'] ?>">
+                    <input type="hidden" name="movieId" value="<?= $movie['movieId'] ?>">
                     <input type="submit" value="edit">
                 </form>
             </td>
             <td>
                 <form action="/movie/delete" method="get">
-                    <input type="hidden" name="id" value="<?= $movie['movieId'] ?>">
+                    <input type="hidden" name="movieId" value="<?= $movie['movieId'] ?>">
                     <input type="submit" value="delete">
                 </form>
             </td>
