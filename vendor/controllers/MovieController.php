@@ -27,28 +27,36 @@ class MovieController extends AbstractController
         $result = count($movies);
         $total_pages = ceil($result / $size_page);
         $res_data = $store->createTable($offset, $size_page);
-        $firstNumber = ($page*$size_page)-($size_page-1);
+        $firstNumber = ($page * $size_page) - ($size_page - 1);
         $view = new View('movies_index');
-        $view->render(['movies' => $res_data, 'page' => $page, 'total_pages' => $total_pages, 'firstNumber'=>$firstNumber]);
+        $view->render(['movies' => $res_data, 'page' => $page, 'total_pages' => $total_pages, 'firstNumber' => $firstNumber]);
     }
 
     /**
      * chose page for create news
      */
-    public function create($movie='', $errors='')
+    public function create($movie = '', $errors = '')
     {
         $view = new View('movie_create');
-        $view->render(['movie'=>$movie, 'errors'=>$errors]);
+        $view->render(['movie' => $movie, 'errors' => $errors]);
     }
 
-    public function validate(array $movie){
+    public function validate(array $movie, $image=true)
+    {
         $errors = [];
-        if($movie['name'] == '' || strlen($movie['name']) > 150){
+        if ($movie['name'] == '' || strlen($movie['name']) > 150) {
             $errors['name'] = 'Name cannot be empty or more than 150 characters';
         }
-        if($movie['description'] == '' || strlen($movie['description']) > 1000){
+        if ($movie['description'] == '' || strlen($movie['description']) > 1000) {
             $errors['description'] = 'Description cannot be empty or more than 1000 characters';
         }
+        if ($movie['releaseDate'] == '' || strlen($movie['releaseDate']) != 10 || !preg_match('/^([0-2][0-9])|([3][0-1])[.]([0][0-9])|([1][0-2])[.][1-2][0-9][0-9][0-9]$/', $movie['releaseDate'])) {
+            $errors['releaseDate'] = 'Release date must be in format DD.MM.YYYY';
+        }
+        if (!in_array($_FILES['image']['type'], ['image/jpeg', 'image/png']) && $image) {
+            $errors['image'] = 'Photo can be format *.jpeg or *.png';
+        }
+        return $errors;
     }
 
 
@@ -57,13 +65,19 @@ class MovieController extends AbstractController
      */
     public function store()
     {
-        $moviesNew = [];
-        $moviesNew['name'] = $_REQUEST['name'];
-        $moviesNew['description'] = $_REQUEST['description'];
-        $moviesNew['releaseDate'] = $_REQUEST['releaseDate'];
-        $store = new Store();
-        $store->addMovie($moviesNew);
-        Route::redirect('/movie/index');
+        $movie = [];
+        $movie['name'] = $_REQUEST['name'];
+        $movie['description'] = $_REQUEST['description'];
+        $movie['releaseDate'] = $_REQUEST['releaseDate'];
+        $errors = $this->validate($movie);
+        if (count($errors) > 0) {
+            $view = new View('movie_create');
+            $view->render(['movie' => $movie, 'errors' => $errors]);
+        } else {
+            $store = new Store();
+            $store->addMovie($movie);
+            Route::redirect('/movie/index');
+        }
     }
 
     /**
@@ -81,7 +95,8 @@ class MovieController extends AbstractController
     /**
      * show more information about movie
      */
-    public function show(){
+    public function show()
+    {
         $store = new Store();
         $movieId = (int)$_REQUEST['movieId'];
         $movie = $store->getMovie($movieId);
@@ -99,9 +114,17 @@ class MovieController extends AbstractController
         $movie['name'] = $_REQUEST['name'];
         $movie['description'] = $_REQUEST['description'];
         $movie['releaseDate'] = $_REQUEST['releaseDate'];
-        $store = new Store();
-        $store->saveMovie($movie);
-        Route::redirect('/movie/index');
+        $movie['image'] = $_REQUEST['imageIfError'];
+        $image=$_FILES['image']['tmp_name'];
+        $errors = $this->validate($movie, $image);
+        if (count($errors) > 0) {
+            $view = new View('movie_edit');
+            $view->render(['movie' => $movie, 'errors' => $errors]);
+        } else {
+            $store = new Store();
+            $store->saveMovie($movie);
+            Route::redirect('/movie/index');
+        }
     }
 
     /**

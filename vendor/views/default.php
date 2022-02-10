@@ -16,8 +16,8 @@
     </div>
 </header>
 <nav></nav>
-<content>
-    <div class="container">
+<content class="">
+    <div class="container bar">
     <?php include_once 'vendor' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $this->_page . '.php' ?>
     </div>
 </content>
@@ -25,6 +25,7 @@
     <h4 class="text-center">&copy; test_yourii_korchevskii</h4>
 </footer>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src=”js/bootstrap.js”></script>
+<script src="/vendor/js/bootstrap.js"></script>
+<script src="/vendor/js/main.js"></script>
 </body>
 </html>

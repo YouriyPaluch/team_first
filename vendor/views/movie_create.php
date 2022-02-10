@@ -1,19 +1,22 @@
 <form enctype="multipart/form-data" action="/movie/store" method="post">
-    <label>Name movie
-        <input type="text" name="name" required>
-        <p class="error"><?php if(isset($errors['name'])){ echo $errors['name']; }?></p>
-    </label>
+    <div class="clearfix">
+        <label>Name movie
+            <input type="text" name="name" value="<?= ($movie['name'] ?? '') ?>" class="input-xlarge" placeholder="Input movie's name">
+            <p class="text-error"><?= $errors['name'] ?? '' ?></p>
+        </label>
+    </div>
     <label>Description
-        <textarea name="description" required></textarea>
-        <p class="error"><?php if(isset($errors['name'])){ echo $errors['description']; }?></p>
+        <textarea name="description" class="input-xxlarge"><?= $movie['description'] ?? '' ?></textarea>
+        <p class="text-error"><?= $errors['description'] ?? '' ?></p>
     </label>
     <label>Data release
-        <input type="date" name="releaseDate" required>
-        <p class="error"><?php if(isset($errors['name'])){ echo $errors['releaseDate']; }?></p>
+        <input type="date" name="releaseDate" value="<?= $movie['releaseDate'] ?? '' ?>">
+        <p class="text-error"><?= $errors['releaseDate'] ?? '' ?></p>
     </label>
     <label>Photo
-        <input type="file" name="photo" required>
-        <p class="error"><?php if(isset($errors['name'])){ echo $errors['photo']; }?></p>
+        <input type="file" name="image" id="image"/>
+        <p class="text-error"><?= $errors['image'] ?? '' ?></p>
     </label>
+    <div id="new_photo"></div>
     <input type="submit" value="Save">
 </form>

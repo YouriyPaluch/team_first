@@ -54,14 +54,14 @@ class Store
         if(!is_dir($uploadDir)){
             mkdir($uploadDir);
         }
-        $tmpName = $_FILES['photo']['tmp_name'];
-        $uploadFile = $uploadDir.'/'.basename($_FILES['photo']['name']);
+        $tmpName = $_FILES['image']['tmp_name'];
+        $uploadFile = $uploadDir.'/'.basename($_FILES['image']['name']);
         move_uploaded_file($tmpName, $uploadFile);
         $movies['description'] = $this->_db->real_escape_string($movies['description']);
         $newKeys = array_keys($movies);
         $newKeysStr = join(', ', $newKeys);
         $movie = '\'' . join("', '" , $movies).'\', \'/'.$uploadFile.'\'';
-        $query = "INSERT INTO `movies`(".$newKeysStr.", photo) values (".$movie.");";
+        $query = "INSERT INTO `movies`(".$newKeysStr.", image) values (".$movie.");";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
@@ -86,20 +86,20 @@ class Store
      * @param array $movies
      */
     public function saveMovie(array $movies){
-        if(!empty($_FILES['photo']['tmp_name'])){
+        if(!empty($_FILES['image']['tmp_name'])){
             $uploadDir = 'photo';
             if(!is_dir($uploadDir)){
                 mkdir($uploadDir);
             }
-            $tmpName = $_FILES['photo']['tmp_name'];
-            $uploadFile = $uploadDir.'/'.basename($_FILES['photo']['name']);
+            $tmpName = $_FILES['image']['tmp_name'];
+            $uploadFile = $uploadDir.'/'.basename($_FILES['image']['name']);
             move_uploaded_file($tmpName, $uploadFile);
         }
         $id = $movies['movieId'];
         $name = $movies['name'];
         $description = $this->_db->real_escape_string($movies['description']);
         $releaseDate = $movies['releaseDate'];
-        $query = "UPDATE `movies` SET `name` = '$name', `description` = '$description', `releaseDate` = '$releaseDate'".($uploadFile?", photo='/$uploadFile'":'')." WHERE `movieId` = $id;";
+        $query = "UPDATE `movies` SET `name` = '$name', `description` = '$description', `releaseDate` = '$releaseDate'".(isset($uploadFile)?", image='/$uploadFile'":'')." WHERE `movieId` = $id;";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
