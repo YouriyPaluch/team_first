@@ -35,14 +35,25 @@ class MovieController extends AbstractController
     /**
      * chose page for create news
      */
-    public function create()
+    public function create($movie='', $errors='')
     {
         $view = new View('movie_create');
-        $view->render();
+        $view->render(['movie'=>$movie, 'errors'=>$errors]);
     }
 
+    public function validate(array $movie){
+        $errors = [];
+        if($movie['name'] == '' || strlen($movie['name']) > 150){
+            $errors['name'] = 'Name cannot be empty or more than 150 characters';
+        }
+        if($movie['description'] == '' || strlen($movie['description']) > 1000){
+            $errors['description'] = 'Description cannot be empty or more than 1000 characters';
+        }
+    }
+
+
     /**
-     * make mass  news and save in DB
+     * make mass news and save in DB
      */
     public function store()
     {
@@ -67,8 +78,10 @@ class MovieController extends AbstractController
         $view->render(['movie' => $movie]);
     }
 
-
-    public function watch(){
+    /**
+     * show more information about movie
+     */
+    public function show(){
         $store = new Store();
         $movieId = (int)$_REQUEST['movieId'];
         $movie = $store->getMovie($movieId);
@@ -101,4 +114,5 @@ class MovieController extends AbstractController
         $store->delMovie($id);
         Route::redirect('/movie/index');
     }
+
 }

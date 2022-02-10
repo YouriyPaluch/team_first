@@ -5,10 +5,10 @@
         <?php foreach ($movies as $movie): ?>
         <tr onclick="document.location='/movie/watch?movieId=<?= $movie['movieId'] ?>'">
             <td><?= $movie['name'] ?></td>
-            <td><img class="span1" src="<?= $movie['photo'] ?>"/></td>
+            <td><img class="span2" src="<?= $movie['photo'] ?>"/></td>
             <td>Release date <?= $movie['releaseDate'] ?></td>
             <td>
-                <a class="btn" href="/movie/watch?movieId=<?= $movie['movieId'] ?>">More</a>
+                <a class="btn" href="/movie/show?movieId=<?= $movie['movieId'] ?>">More</a>
                 <a class="btn" href="/movie/edit?movieId=<?= $movie['movieId'] ?>">Edit</a>
                 <a class="btn" href="/movie/delete?movieId=<?= $movie['movieId'] ?>">Delete</a>
 <!--                <form action="/movie/edit" method="get">-->
@@ -28,9 +28,10 @@
 </div>
 <!--<div>Hello</div>-->
 <div>
+    <?php if ($page > 1): ?>
     <ul class="nav text-center">
         <li class="btn"><a href="?page=1">First</a></li>
-        <li class="btn <?php if ($page <= 1): ?>disabled<?php endif; ?>">
+        <li class="btn">
             <a href="<?php if ($page <= 1) {
                 echo '#';
             } else {
@@ -48,6 +49,7 @@
         </li>
         <li class="btn"><a href="?page=<?php echo $total_pages; ?>">Last</a></li>
     </ul>
+    <?php endif; ?>
 </div>
 <?php else: ?>
     <h2>Now site not have movies</h2>
