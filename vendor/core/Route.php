@@ -4,7 +4,7 @@ namespace core;
 class Route
 {
     static public function init(){
-        $controllerName = 'Index';
+        $controllerName = 'Movie';
         $actionName = 'index';
 
         $url = $_SERVER['REDIRECT_URL']??'';

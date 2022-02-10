@@ -22,7 +22,7 @@ class MovieController extends AbstractController
         } else {
             $page = 1;
         }
-        $size_page = 1;
+        $size_page = 10;
         $offset = ($page - 1) * $size_page;
         $result = count($movies);
         $total_pages = ceil($result / $size_page);
@@ -82,9 +82,10 @@ class MovieController extends AbstractController
     public function update()
     {
         $movie = [];
-        $movie['id'] = $_REQUEST['id'];
-        $movie['title'] = $_REQUEST['title'];
-        $movie['text'] = $_REQUEST['text'];
+        $movie['movieId'] = $_REQUEST['movieId'];
+        $movie['name'] = $_REQUEST['name'];
+        $movie['description'] = $_REQUEST['description'];
+        $movie['releaseDate'] = $_REQUEST['releaseDate'];
         $store = new Store();
         $store->saveMovie($movie);
         Route::redirect('/movie/index');
@@ -95,7 +96,7 @@ class MovieController extends AbstractController
      */
     public function delete()
     {
-        $id = $_REQUEST['id'];
+        $id = $_REQUEST['movieId'];
         $store = new Store();
         $store->delMovie($id);
         Route::redirect('/movie/index');
