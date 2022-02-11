@@ -83,10 +83,11 @@ class Store
      * @param array $movies
      */
     public function saveMovie(array $movies){
+        $id = $movies['movieId'];
         if(!empty($_FILES['image']['tmp_name'])){
             $uploadFile = $this->saveImage();
+            unlink(substr($this->getMovie($id)['image'],1));
         }
-        $id = $movies['movieId'];
         $name = $movies['name'];
         $description = $this->_db->real_escape_string($movies['description']);
         $releaseDate = $movies['releaseDate'];
@@ -114,6 +115,7 @@ class Store
      * @param int $id
      */
     public function delMovie(int $id){
+        unlink(substr($this->getMovie($id)['image'],1));
         $query = "DELETE FROM `movies` WHERE `movieId` = $id;";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
