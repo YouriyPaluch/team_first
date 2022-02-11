@@ -47,7 +47,7 @@ class Store
     }
 
     /** add new movie to DB
-     * @param $newsItem
+     * @param $movies
      */
     public function addMovie(array $movies){
         if(!is_dir(UPLOAD_DIR)){
@@ -55,10 +55,10 @@ class Store
         }
         $uploadFile = $this->saveImage();
         $movies['description'] = $this->_db->real_escape_string($movies['description']);
-        $newKeys = array_keys($movies);
-        $newKeysStr = join(', ', $newKeys);
+        $moviesKeys = array_keys($movies);
+        $moviesKeysStr = join(', ', $moviesKeys);
         $movie = '\'' . join("', '" , $movies).'\', \'/'.$uploadFile.'\'';
-        $query = "INSERT INTO `movies`(".$newKeysStr.", image) values (".$movie.");";
+        $query = "INSERT INTO `movies`(".$moviesKeysStr.", image) values (".$movie.");";
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }

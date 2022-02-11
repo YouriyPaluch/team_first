@@ -59,7 +59,7 @@ class MovieController extends AbstractController
         if ($movie['releaseDate'] == '' || strlen($movie['releaseDate']) != 10 || !preg_match('/^([0-2][0-9])|([3][0-1])[.]([0][0-9])|([1][0-2])[.][1-2][0-9][0-9][0-9]$/', $movie['releaseDate'])) {
             $errors['releaseDate'] = 'Release date must be in format DD.MM.YYYY';
         }
-        if (!in_array($_FILES['image']['type'], ['image/jpeg', 'image/png']) && $image) {
+        if (!in_array($_FILES['image']['type'], ['image/jpeg', 'image/png', 'image/jpg']) && $image) {
             $errors['image'] = 'Photo can be format *.jpeg or *.png';
         }
         return $errors;
@@ -114,7 +114,7 @@ class MovieController extends AbstractController
     }
 
     /**
-     * make mass changes news and save in DB
+     * make mass changes movie and save in DB
      */
     public function update()
     {
@@ -137,7 +137,7 @@ class MovieController extends AbstractController
     }
 
     /**
-     * delete news
+     * delete movie
      */
     public function delete()
     {
