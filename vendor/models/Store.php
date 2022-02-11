@@ -92,7 +92,7 @@ class Store
                 mkdir($uploadDir);
             }
             $tmpName = $_FILES['image']['tmp_name'];
-            $uploadFile = $uploadDir.'/'.basename($_FILES['image']['name']);
+            $uploadFile = $uploadDir.'/'.md5(time().$_FILES['image']['name']).str_replace('image/','.' ,$_FILES['image']['type']);
             move_uploaded_file($tmpName, $uploadFile);
         }
         $id = $movies['movieId'];

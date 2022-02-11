@@ -78,6 +78,9 @@ class MovieController extends AbstractController
             $store->addMovie($movie);
             Route::redirect('/movie/index');
         }
+        if($movie['releaseDate'] == '' ){
+            $errors['releaseDate'] = 'Release date cannot be empty or more than 1000 characters';
+        }
     }
 
     /**
