@@ -8,8 +8,9 @@
     <link rel="icon" href="/vendor/img/favicon.png" type="image/x-icon">
     <title>Popular movies</title>
     <link rel="stylesheet" href="/vendor/css/bootstrap.css">
+    <link rel="stylesheet" href="/vendor/css/style.css">
 </head>
-<body>
+<body class="main-back">
 <header>
     <div class="container img-polaroid modal-header">
         <a href="/"><img src="/vendor/img/my_site.webp" alt="My_site" class="img-rounded img-circle span2"/></a>
