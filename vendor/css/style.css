@@ -1,4 +1,16 @@
-
+*{
+    margin: 3px;
+}
 .main-back{
-    background-image: url('/vendor/img/body.jpg');
+    background-image: url("/vendor/img/body.jpg");
+}
+
+.custom-header{
+    background-image: url("/vendor/img/header.jpg");
+}
+.custom-footer{
+    background-image: url("/vendor/img/footer.jpg");
+}
+.author{
+    background-color: #ffffff;
 }

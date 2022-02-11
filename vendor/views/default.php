@@ -11,19 +11,19 @@
     <link rel="stylesheet" href="/vendor/css/style.css">
 </head>
 <body class="main-back">
-<header>
-    <div class="container img-polaroid modal-header">
+<header class="container img-polaroid modal-header custom-header">
+    <div>
         <a href="/"><img src="/vendor/img/my_site.webp" alt="My_site" class="img-rounded img-circle span2"/></a>
     </div>
 </header>
 <nav></nav>
-<content class="">
-    <div class="container bar">
+<content class="container custom-header">
+    <div class="container">
     <?php include_once 'vendor' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $this->_page . '.php' ?>
     </div>
 </content>
-<footer class="container img-polaroid modal-footer">
-    <h4 class="text-center">&copy; test_yourii_korchevskii</h4>
+<footer class="container img-polaroid modal-footer custom-footer">
+    <h4 class="text-center author">&copy; test_yourii_korchevskii</h4>
 </footer>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/vendor/js/bootstrap.js"></script>

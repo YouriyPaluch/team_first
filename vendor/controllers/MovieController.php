@@ -33,7 +33,7 @@ class MovieController extends AbstractController
     }
 
     /**
-     * chose page for create news
+     * chose page for create movie
      */
     public function create($movie = '', $errors = '')
     {
@@ -41,13 +41,19 @@ class MovieController extends AbstractController
         $view->render(['movie' => $movie, 'errors' => $errors]);
     }
 
+    /**
+     * validate data
+     * @param array $movie
+     * @param bool $image
+     * @return array
+     */
     public function validate(array $movie, $image=true)
     {
         $errors = [];
         if ($movie['name'] == '' || strlen($movie['name']) > 150) {
             $errors['name'] = 'Name cannot be empty or more than 150 characters';
         }
-        if ($movie['description'] == '' || strlen($movie['description']) > 1000) {
+        if ($movie['description'] == '' || strlen($movie['description']) > 10000) {
             $errors['description'] = 'Description cannot be empty or more than 1000 characters';
         }
         if ($movie['releaseDate'] == '' || strlen($movie['releaseDate']) != 10 || !preg_match('/^([0-2][0-9])|([3][0-1])[.]([0][0-9])|([1][0-2])[.][1-2][0-9][0-9][0-9]$/', $movie['releaseDate'])) {
@@ -61,7 +67,7 @@ class MovieController extends AbstractController
 
 
     /**
-     * make mass news and save in DB
+     * make movie and save in DB
      */
     public function store()
     {
@@ -84,7 +90,7 @@ class MovieController extends AbstractController
     }
 
     /**
-     * chose page for edit news
+     * chose page for edit movie
      */
     public function edit()
     {

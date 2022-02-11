@@ -6,16 +6,24 @@
             <?php foreach ($movies
 
             as $movie): ?>
-            <tr onclick="document.location='/movie/show?movieId=<?= $movie['movieId'] ?>'">
-                <td colspan="2"><img class="span4" src="<?= $movie['image'] ?>"/></td>
+            <tr>
+                <td colspan="2" onclick="document.location='/movie/show?movieId=<?= $movie['movieId'] ?>'">
+                    <img class="span4" src="<?= $movie['image'] ?>" />
+                </td>
                 <td>
                     <h4><?= $movie['name'] ?></h4>
                     <h6>Release date: <?= $movie['releaseDate'] ?></h6>
                 </td>
                 <td>
-                    <a class="btn btn-primary" href="/movie/show?movieId=<?= $movie['movieId'] ?>">More</a>
-                    <a class="btn btn-primary" href="/movie/edit?movieId=<?= $movie['movieId'] ?>">Edit</a>
-                    <a class="btn btn-primary" href="/movie/delete?movieId=<?= $movie['movieId'] ?>">Delete</a>
+                    <div class="column">
+                        <a class="btn btn-primary span2" href="/movie/show?movieId=<?= $movie['movieId'] ?>">More</a>
+                    </div>
+                    <div class="column">
+                        <a class="btn btn-primary span2" href="/movie/edit?movieId=<?= $movie['movieId'] ?>">Edit</a>
+                    </div>
+                    <div class="column">
+                        <a class="btn btn-primary span2" href="/movie/delete?movieId=<?= $movie['movieId'] ?>">Delete</a>
+                    </div>
                 </td>
                 <?php endforeach; ?>
         </table>
