@@ -30,7 +30,7 @@ class Store
     }
 
     /**
-     * select all news
+     * select all movies
      * @return mixed|void
      */
     public function allMovies(){
@@ -46,17 +46,14 @@ class Store
 
     }
 
-    /** add new news to DB
+    /** add new movie to DB
      * @param $newsItem
      */
     public function addMovie(array $movies){
-        $uploadDir = 'photo';
-        if(!is_dir($uploadDir)){
-            mkdir($uploadDir);
+        if(!is_dir(UPLOAD_DIR)){
+            mkdir(UPLOAD_DIR);
         }
-        $tmpName = $_FILES['image']['tmp_name'];
-        $uploadFile = $uploadDir.'/'.basename($_FILES['image']['name']);
-        move_uploaded_file($tmpName, $uploadFile);
+        $uploadFile = $this->saveImage();
         $movies['description'] = $this->_db->real_escape_string($movies['description']);
         $newKeys = array_keys($movies);
         $newKeysStr = join(', ', $newKeys);
@@ -68,7 +65,7 @@ class Store
     }
 
     /**
-     * select news by ID
+     * select movie by ID
      * @param int $id
      * @return mixed|void
      */
@@ -82,18 +79,12 @@ class Store
     }
 
     /**
-     * save edit news by id
+     * save edit movie by ID
      * @param array $movies
      */
     public function saveMovie(array $movies){
         if(!empty($_FILES['image']['tmp_name'])){
-            $uploadDir = 'photo';
-            if(!is_dir($uploadDir)){
-                mkdir($uploadDir);
-            }
-            $tmpName = $_FILES['image']['tmp_name'];
-            $uploadFile = $uploadDir.'/'.md5(time().$_FILES['image']['name']).str_replace('image/','.' ,$_FILES['image']['type']);
-            move_uploaded_file($tmpName, $uploadFile);
+            $uploadFile = $this->saveImage();
         }
         $id = $movies['movieId'];
         $name = $movies['name'];
@@ -103,6 +94,20 @@ class Store
         if(!$this->_db->query($query)){
             die($this->_db->error);//TODO exeption
         }
+    }
+
+    /**
+     * save image into image dir
+     * @return string
+     */
+    protected function saveImage(){
+        if(!is_dir(UPLOAD_DIR)){
+            mkdir(UPLOAD_DIR);
+        }
+        $tmpName = $_FILES['image']['tmp_name'];
+        $uploadFile = UPLOAD_DIR.'/'.md5(time().$_FILES['image']['name']).str_replace('image/','.' ,$_FILES['image']['type']);
+        move_uploaded_file($tmpName, $uploadFile);
+        return $uploadFile;
     }
 
     /**
