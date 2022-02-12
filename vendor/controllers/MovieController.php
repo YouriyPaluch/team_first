@@ -22,11 +22,11 @@ class MovieController extends AbstractController
         } else {
             $page = 1;
         }
-        $size_page = 10;
+        $size_page = MOVIES_IN_PAGE;
         $offset = ($page - 1) * $size_page;
         $result = count($movies);
         $total_pages = ceil($result / $size_page);
-        $res_data = $store->createTable($offset, $size_page);
+        $res_data = $store->fromPagination($offset, $size_page);
         $firstNumber = ($page * $size_page) - ($size_page - 1);
         $view = new View('movies_index');
         $view->render(['movies' => $res_data, 'page' => $page, 'total_pages' => $total_pages, 'firstNumber' => $firstNumber]);
@@ -53,8 +53,8 @@ class MovieController extends AbstractController
         if ($movie['name'] == '' || strlen($movie['name']) > 150) {
             $errors['name'] = 'Name cannot be empty or more than 150 characters';
         }
-        if ($movie['description'] == '' || strlen($movie['description']) > 10000) {
-            $errors['description'] = 'Description cannot be empty or more than 1000 characters';
+        if (strlen($movie['description']) > 10000) {
+            $errors['description'] = 'Description cannot be more than 10000 characters';
         }
         if ($movie['releaseDate'] == '' || strlen($movie['releaseDate']) != 10 || !preg_match('/^([0-2][0-9])|([3][0-1])[.]([0][0-9])|([1][0-2])[.][1-2][0-9][0-9][0-9]$/', $movie['releaseDate'])) {
             $errors['releaseDate'] = 'Release date must be in format DD.MM.YYYY';

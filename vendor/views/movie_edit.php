@@ -1,3 +1,4 @@
+<h2 class="text-center">Edit saved movie</h2>
 <table>
     <form action="/movie/update" method="post" enctype="multipart/form-data">
         <input type="hidden" name="movieId" value="<?= $movie['movieId'] ?>">

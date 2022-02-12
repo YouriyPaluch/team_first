@@ -1,3 +1,4 @@
+<h2 class="text-center">Add new movie</h2>
 <table>
     <form enctype="multipart/form-data" action="/movie/store" method="post">
         <tr>
