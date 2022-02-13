@@ -45,9 +45,9 @@ class Store
     public function createTable(){
         $query = "CREATE TABLE IF NOT EXISTS " . DB_TABLE_NAME . "(
             `movieId` INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            `name` VARCHAR(50) NOT NULL,
+            `name` VARCHAR(150) NOT NULL,
             `description` TEXT NULL DEFAULT NULL,
-            `releaseDate` TIMESTAMP NOT NULL,
+            `releaseDate` DATE NOT NULL,
             `image` VARCHAR (255) NOT NULL
             );";
         if (!$this->_db->query($query)) {

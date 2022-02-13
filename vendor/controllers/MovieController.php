@@ -74,6 +74,7 @@ class MovieController extends AbstractController
         $movie = [];
         $movie['name'] = $_REQUEST['name'];
         $movie['description'] = $_REQUEST['description'];
+        $movie['description'] = $_REQUEST['description'];
         $movie['releaseDate'] = $_REQUEST['releaseDate'];
         $errors = $this->validate($movie);
         if (count($errors) > 0) {

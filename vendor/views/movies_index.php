@@ -32,28 +32,6 @@
     </div>
     <div class="pagination pagination-centered">
         <?php if ($total_pages > 1): ?>
-            <ul >
-                <?php if ($page > 1): ?>
-                    <li>
-                        <a href="/">First</a>
-                    </li>
-                    <li>
-                        <a href="?page=<?= ($page - 1) ?>">Prev</a>
-                    </li>
-                <?php endif; ?>
-                <?php if ($page != $total_pages): ?>
-                    <li>
-                        <a href="?page=<?= ($page + 1) ?>">Next</a>
-                    </li>
-                    <li>
-                        <a href="?page=<?= $total_pages ?>">Last</a>
-                    </li>
-                <?php endif; ?>
-            </ul>
-        <?php endif; ?>
-    </div>
-    <div class="pagination pagination-centered">
-        <?php if ($total_pages > 1): ?>
             <ul>
                 <?php if ($page > 1): ?>
                     <li>

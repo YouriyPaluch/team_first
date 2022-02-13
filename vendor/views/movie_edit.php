@@ -1,13 +1,13 @@
 <h2 class="text-center">Edit saved movie</h2>
 <table>
     <form action="/movie/update" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="movieId" value="<?= $movie['movieId'] ?>">
+        <input type="hidden" name="movieId" value="<?= $movie['movieId'] ?>"/>
         <tr>
             <td>
                 <label class="span2" for="name">Name</label>
             </td>
             <td>
-                <input type="text" id="name" name="name" value="<?= $movie['name'] ?>" class="span3">
+                <input type="text" id="name" name="name" value="<?= $movie['name'] ?>" class="span3" required/>
                 <p class="text-error"><?= $errors['name'] ?? '' ?></p>
             </td>
         </tr>
@@ -26,7 +26,7 @@
                 <label for="releaseDate">Data release</label>
             </td>
             <td>
-                <input type="date" id="releaseDate" name="releaseDate" value="<?= $movie['releaseDate'] ?>" class="span3">
+                <input type="date" id="releaseDate" name="releaseDate" value="<?= $movie['releaseDate'] ?>" class="span3" required/>
                 <p class="text-error"><?= $errors['releaseDate'] ?? '' ?></p>
             </td>
         </tr>
@@ -34,7 +34,7 @@
             <td>Saved photo</td>
             <td>
                 <img class="span3" src="<?= $movie['image'] ?>"/>
-                <input type="hidden" name="imageIfError" value="<?= $movie['image'] ?>">
+                <input type="hidden" name="imageIfError" value="<?= $movie['image'] ?>"/>
             </td>
         </tr>
         <tr>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
             <td colspan="2" class="text-center">
-                <input class="span2" type="submit" value="Update">
+                <input class="span2" type="submit" value="Update"/>
             </td>
         </tr>
     </form>

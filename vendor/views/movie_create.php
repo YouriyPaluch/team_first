@@ -6,8 +6,7 @@
                 <label for="name"> Name movie</label>
             </td>
             <td>
-                <input type="text" id="name" name="name" value="<?= ($movie['name'] ?? '') ?>"
-                       placeholder="Input movie's name">
+                <input type="text" id="name" name="name" value="<?= ($movie['name'] ?? '') ?>" placeholder="Input movie's name" required/>
                 <p class="text-error"><?= $errors['name'] ?? '' ?></p>
             </td>
         </tr>
@@ -26,7 +25,7 @@
                 <label for="releaseDate">Data release</label>
             </td>
             <td>
-                <input type="date" id="releaseDate" name="releaseDate" value="<?= $movie['releaseDate'] ?? '' ?>">
+                <input type="date" id="releaseDate" name="releaseDate" value="<?= $movie['releaseDate'] ?? '' ?>" required/>
                 <p class="text-error"><?= $errors['releaseDate'] ?? '' ?></p>
             </td>
         </tr>
@@ -35,14 +34,14 @@
                 <label>Photo</label>
             </td>
             <td>
-                <input type="file" name="image" id="image"/>
+                <input type="file" name="image" id="image" required/>
                 <div id="new_photo"></div>
                 <p class="text-error"><?= $errors['image'] ?? '' ?></p>
             </td>
         </tr>
         <tr>
             <td colspan="2" class="text-center">
-                <input class="span2" type="submit" value="Save">
+                <input class="span2" type="submit" value="Save"/>
             </td>
         </tr>
     </form>
